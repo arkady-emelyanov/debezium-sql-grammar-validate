@@ -30,16 +30,13 @@ public class SqlValidator {
 
         final Namespace args1 = parser.parseArgs(args);
         String fileName = args1.getString("file");
-        logger.info("Reading {}", fileName);
+        logger.info("Reading: '{}'", fileName);
 
         File file = new File(fileName);
         String ddlContent = FileUtils.readFileToString(file, "utf-8");
-        logger.info("Provided SQL: '{}'", ddlContent);
-
         MySqlAntlrDdlParser sqlParser = new MySqlAntlrDdlParser();
         Tables tables = new Tables();
         sqlParser.parse(ddlContent, tables);
-
         logger.info("Parse successful.");
     }
 }
